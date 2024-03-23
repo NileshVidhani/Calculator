@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .calculator {
+        width: 300px;
+        background: #282828;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        display: grid;
+        grid-gap: 10px;
+    }
+
+    .calculator-display {
+        grid-column: span 4;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 24px;
+        text-align: right;
+        overflow: hidden;
+    }
+
+    .calculator-button {
+        width: 60px;
+        height: 60px;
+        font-size: 20px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        background: linear-gradient(to bottom right, #f57c00, #ff9800);
+        border-radius: 5px;
+        color: #fff;
+        transition: background 0.3s;
+    }
+
+    .calculator-button:hover {
+        background: linear-gradient(to bottom right, #e65100, #ff8f00);
+    }
+
+    .calculator-button.operator {
+        background: linear-gradient(to bottom right, #1976D2, #2196F3);
+    }
+
+    .calculator-button.operator:hover {
+        background: linear-gradient(to bottom right, #0D47A1, #1565C0);
+    }
+
+    .calculator-button.equal {
+        background: linear-gradient(to bottom right, #ff6f00, #ffab40);
+    }
+
+    .calculator-button.equal:hover {
+        background: linear-gradient(to bottom right, #e65100, #ff9800);
+    }
+
+    .calculator-button.clear {
+        background: linear-gradient(to bottom right, #4CAF50, #81C784);
+    }
+
+    .calculator-button.clear:hover {
+        background: linear-gradient(to bottom right, #388E3C, #66BB6A);
+    }
+
+    .calculator-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
+    }
+</style>
+</head>
+<body>
+
+<div class="calculator">
+    <div class="calculator-display" id="result">0</div>
+    <div class="calculator-grid">
+        <button class="calculator-button clear" onclick="clearResult()">C</button>
+        <button class="calculator-button" onclick="appendToResult('7')">7</button>
+        <button class="calculator-button" onclick="appendToResult('8')">8</button>
+        <button class="calculator-button" onclick="appendToResult('9')">9</button>
+        <button class="calculator-button operator" onclick="appendToResult('+')">+</button>
+        <button class="calculator-button" onclick="appendToResult('4')">4</button>
+        <button class="calculator-button" onclick="appendToResult('5')">5</button>
+        <button class="calculator-button" onclick="appendToResult('6')">6</button>
+        <button class="calculator-button operator" onclick="appendToResult('-')">-</button>
+        <button class="calculator-button" onclick="appendToResult('1')">1</button>
+        <button class="calculator-button" onclick="appendToResult('2')">2</button>
+        <button class="calculator-button" onclick="appendToResult('3')">3</button>
+        <button class="calculator-button operator" onclick="appendToResult('*')">*</button>
+        <button class="calculator-button" onclick="appendToResult('0')">0</button>
+        <button class="calculator-button" onclick="appendToResult('.')">.</button>
+        <button class="calculator-button equal" onclick="calculateResult()">=</button>
+        <button class="calculator-button operator" onclick="appendToResult('/')">/</button>
+    </div>
+</div>
+
+<script>
+    function appendToResult(value) {
+        if (document.getElementById('result').innerText === '0' && value !== '.' && value !== 'C') {
+            document.getElementById('result').innerText = '';
+        }
+        if (value === 'C') {
+            document.getElementById('result').innerText = '0';
+        } else {
+            document.getElementById('result').innerText += value;
+        }
+    }
+
+    function clearResult() {
+        document.getElementById('result').innerText = '0';
+    }
+
+    function calculateResult() {
+        var result = document.getElementById('result').innerText;
+        try {
+            document.getElementById('result').innerText = eval(result);
+        } catch (e) {
+            document.getElementById('result').innerText = 'Error';
+        }
+    }
+</script>
+
+</body>
+</html>
